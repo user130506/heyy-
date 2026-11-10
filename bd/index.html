@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>bon anniversaire</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=Kalam:wght@400;700&family=Caveat+Brush&display=swap">
+<style>
+  :root{ --bg:#060606; --lime:#ffd84d; --white:#f5f5f2; --grey:#8d8d88; --glass:#171717; --edge:#2e2e2e; }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+  html,body{margin:0}
+  body{
+    min-height:100vh; min-height:100dvh; background:var(--bg); color:var(--white); overflow-x:hidden; text-align:center;
+    font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; position:relative;
+  }
+
+  .screen{position:relative; z-index:1; min-height:100vh; min-height:100dvh; display:none; flex-direction:column; align-items:center; justify-content:center; padding:32px 24px}
+  .screen.on{display:flex}
+  h1,h2,.n{font-family:"Caveat Brush","Kalam","Bradley Hand",cursive}
+
+  /* Intro */
+  .tag{display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border:1px solid var(--edge); background:var(--glass); border-radius:999px; font-size:.82rem; color:var(--grey); margin-bottom:26px}
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--lime); box-shadow:0 0 0 0 rgba(255,216,77,.7); animation:ping 1.8s infinite}
+  @keyframes ping{70%{box-shadow:0 0 0 10px rgba(255,216,77,0)}100%{box-shadow:0 0 0 0 rgba(255,216,77,0)}}
+  #intro h1{font-size:clamp(2.7rem,13vw,3.9rem); font-weight:400; line-height:1.1; letter-spacing:0; margin:0 0 14px; max-width:12ch; rotate:-2deg}
+  #intro p{margin:0 0 36px; color:var(--grey); font-size:1.05rem}
+  button{
+    font-family:"Space Grotesk",inherit; font-size:1.1rem; font-weight:700; color:#0a0c00; background:var(--lime); border:0; border-radius:18px;
+    padding:18px 34px; min-height:58px; cursor:pointer; box-shadow:0 0 0 1px rgba(255,255,255,.2) inset; transition:transform .12s, box-shadow .12s;
+  }
+  button:active{transform:scale(.97)}
+  button:focus-visible{outline:2px solid var(--white); outline-offset:4px}
+  .ghost{background:var(--glass); color:var(--white); box-shadow:none; border:1px solid var(--edge); font-weight:500; font-size:.95rem; min-height:48px; padding:12px 22px; margin-top:26px}
+
+  /* Countdown */
+  .ring{position:relative; width:min(72vw,300px); aspect-ratio:1/1; display:grid; place-items:center}
+  .ring svg{position:absolute; inset:0; width:100%; height:100%}
+  .ring circle{fill:none; stroke-width:3}
+  .ring .bg{stroke:rgba(255,255,255,.1)}
+  .ring .fg{stroke:var(--lime); stroke-linecap:round; stroke-dasharray:565; stroke-dashoffset:565}
+  .ring.run .fg{animation:fill .8s linear forwards}
+  @keyframes fill{to{stroke-dashoffset:0}}
+  .n{font-size:clamp(6rem,34vw,9.5rem); font-weight:400; letter-spacing:0; line-height:1; animation:pop .5s ease-out}
+  @keyframes pop{0%{transform:scale(.6); opacity:0}100%{transform:scale(1); opacity:1}}
+
+  /* Flash */
+  #flash h2{font-size:clamp(2.8rem,15vw,5.5rem); font-weight:400; letter-spacing:0; rotate:-4deg; margin:0; color:var(--lime); animation:boom .55s cubic-bezier(.2,1.4,.4,1)}
+  @keyframes boom{0%{transform:scale(.4); opacity:0; filter:blur(14px)}100%{transform:scale(1); opacity:1; filter:none}}
+
+  /* Reveal */
+  #reveal{justify-content:flex-start; padding-top:44px; padding-bottom:56px}
+  .hb{font-size:clamp(2.6rem,13vw,3.9rem); font-weight:400; line-height:1.1; letter-spacing:0; margin:0 0 30px; rotate:-2deg}
+  .hb span{display:block; position:relative; width:fit-content; margin:0 auto; color:var(--white)}
+  .who{display:block; margin-top:22px; font-style:normal; color:var(--lime)}
+  .squig{position:absolute; left:0; right:0; bottom:-12px; width:100%; height:16px; overflow:visible}
+  .doodle{position:absolute; width:44px; height:44px; fill:none; stroke:var(--white); stroke-width:3; stroke-linecap:round; stroke-linejoin:round; opacity:.85; pointer-events:none}
+  .panel{position:relative; width:100%; max-width:360px; padding:0; rotate:-1.5deg}
+  .panel::before,.panel::after{content:""; position:absolute; top:-10px; width:78px; height:24px; background:rgba(255,170,200,.85); z-index:2; border-radius:2px}
+  .panel::before{left:-16px; rotate:-36deg}
+  .panel::after{right:-16px; rotate:36deg}
+  .photo{border-radius:4px; overflow:hidden; background:#151515; border:7px solid var(--white); box-shadow:0 18px 40px rgba(0,0,0,.55)}
+  .photo img{display:block; width:100%; aspect-ratio:4/5; object-fit:cover}
+  .ph{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; aspect-ratio:4/5; padding:16px; color:var(--grey); font-size:.95rem}
+  .ph span{font-size:2.4rem}
+  .msg{margin:0; padding:18px 6px 8px; font-family:"Kalam","Bradley Hand",cursive; font-weight:400; font-size:1.3rem; line-height:1.45; color:var(--white)}
+  .sign{margin:0; padding:0 6px 8px; color:var(--grey); font-family:"Kalam",cursive; font-weight:400; font-size:1.1rem}
+
+  .yn{display:flex; gap:14px; justify-content:center; align-items:center; min-height:120px; width:100%}
+  .no{background:var(--glass); color:var(--white); box-shadow:none; border:1px solid var(--edge); font-weight:500; transition:transform .25s cubic-bezier(.3,1.4,.5,1)}
+  .nomsg{min-height:2.6em; margin:6px 0 0 !important; font-size:.98rem !important; color:var(--lime) !important}
+  .cap{margin:26px 0 0; min-height:2.8em; color:var(--grey); font-size:1.05rem; max-width:20ch}
+  .cap2{margin:12px 6px 0; font-family:"Kalam","Bradley Hand",cursive; font-size:1.15rem; color:var(--white); line-height:1.1}
+  .note{
+    width:100%; max-width:340px; margin:26px auto 0; padding:16px 18px 14px; background:#fff3a8; color:#2d2a12; border-radius:6px;
+    transform:rotate(-2deg); box-shadow:0 14px 30px rgba(0,0,0,.5); text-align:left; position:relative;
+  }
+  .note::before{content:""; position:absolute; top:-10px; left:50%; width:84px; height:22px; transform:translateX(-50%) rotate(3deg); background:rgba(255,170,200,.85); border-radius:3px}
+  .note p{margin:0; font-family:"Kalam","Bradley Hand",cursive; font-size:1.2rem; line-height:1.35}
+  .note .by{margin-top:8px; text-align:right; font-size:1.05rem}
+  .rise{opacity:0; transform:translateY(22px); animation:rise .7s cubic-bezier(.2,.8,.2,1) forwards}
+  .d1{animation-delay:.05s}.d2{animation-delay:.3s}.d3{animation-delay:.9s}.d4{animation-delay:1.3s}
+  @keyframes rise{to{opacity:1; transform:none}}
+  canvas{position:fixed; inset:0; pointer-events:none; z-index:10}
+  @media (prefers-reduced-motion:reduce){.dot,.n,#flash h2{animation:none}.ring.run .fg{animation:none; stroke-dashoffset:0}.rise{animation:none; opacity:1; transform:none}}
+  /* Spontané et cool : boutons « autocollants » */
+  button{font-family:"Caveat Brush","Kalam",cursive; font-weight:400; font-size:1.5rem; letter-spacing:.02em; border:3px solid var(--white); border-radius:14px; box-shadow:5px 5px 0 var(--white); rotate:-1.5deg}
+  button:active{transform:translate(4px,4px); box-shadow:1px 1px 0 var(--white)}
+  .no{background:#000; color:var(--white); font-size:1.35rem; rotate:2deg}
+  .ghost{box-shadow:none; border:2px dashed #666; background:transparent; color:var(--white); font-family:"Kalam",cursive; font-weight:400; font-size:1.1rem; rotate:0deg}
+  .tag{font-family:"Kalam",cursive; font-weight:400; font-size:1.1rem; color:var(--lime); border:2px dashed var(--lime); background:transparent; rotate:-3deg}
+  .ring .fg{fill:none; stroke:var(--lime); stroke-width:5; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1}
+</style>
+</head>
+<body>
+
+<section class="screen on" id="intro">
+  <h1 id="introTitle">j’ai quelque chose pour toiii</h1>
+  <p> t’es prêt ?</p>
+  <div class="yn"><button id="go">Oui !</button><button class="no" id="no">Non</button></div>
+  <p class="nomsg" id="nomsg"></p>
+</section>
+
+<section class="screen" id="count">
+  <div class="ring" id="ring">
+    <svg viewBox="0 0 200 200"><path class="fg" pathLength="1" d="M102 12 C152 10 190 50 188 100 C186 152 146 190 96 188 C46 186 10 148 14 98 C18 48 58 16 112 16 C130 17 144 22 154 30"/></svg>
+    <div class="n" id="n">3</div>
+  </div>
+  <p class="cap" id="cap"></p>
+</section>
+
+<section class="screen" id="flash"><h2>SURPRISE !</h2></section>
+
+<section class="screen" id="reveal">
+  <svg class="doodle" style="top:26px;right:22px;rotate:12deg" viewBox="0 0 50 50"><path d="M25 3 L29 20 L46 25 L29 30 L25 47 L21 30 L4 25 L21 20 Z"/></svg>
+  <svg class="doodle" style="top:150px;left:14px;width:30px;height:30px;rotate:-10deg" viewBox="0 0 50 50"><path d="M25 3 L29 20 L46 25 L29 30 L25 47 L21 30 L4 25 L21 20 Z"/></svg>
+  <h1 class="hb rise d1" id="hb">Joyeux<span>anniversaire<svg class="squig" viewBox="0 0 300 16" preserveAspectRatio="none"><path d="M4 9 C28 1 48 15 78 7 S128 1 158 9 S214 15 244 6 S284 4 296 9" fill="none" stroke="#ffd84d" stroke-width="5" stroke-linecap="round"/></svg></span><em class="who" id="who"></em></h1>
+  <div class="panel rise d2">
+    <div class="photo">
+      <!-- 📸 Mets ta photo dans le même dossier que ce fichier et nomme-la : photo.jpg -->
+      <img id="pic" src="photo.jpg.jpeg" alt="Photo">
+    
+    </div>
+    <p class="cap2" id="caption"></p>
+    <p class="msg" id="text"></p>
+    <p class="sign" id="sign"></p>
+  </div>
+  <div class="note rise d3"><p id="note"></p><p class="by" id="by"></p></div>
+  <button class="ghost rise d4" id="again">Revoir la surprise</button>
+</section>
+
+<canvas id="fx"></canvas>
+
+<script>
+  // ✏️ À MODIFIER
+  const NAME    = "rafiiiik";   // ex : "Karim"
+  const MESSAGE = "Joyeux anniversaire ! ❤️ Je te souhaite une année remplie de bonheur, de réussite et de beaux moments. En tout cas, je suis contente de te connaître. Profite de ta journée, BISOUS";
+  const SIGN    = "Houda qui t’aime fort";  // ex : "Ton meilleur ami"
+  const CAPTION = "+1";
+  const NOTE    = "P.S. Ton vrai cadeau arrive bientôt. Enfin, avoir  quelqu’un comme moi dans ta vie, c’est déjà un cadeau, non ? 😌";
+  const BY      = "— Houda";
+
+  document.getElementById("text").textContent = MESSAGE;
+  document.getElementById("sign").textContent = SIGN;
+  document.getElementById("caption").textContent = CAPTION;
+  document.getElementById("note").textContent = NOTE;
+  document.getElementById("by").textContent = BY;
+  if (NAME) {
+    document.getElementById("who").textContent = NAME + " !";
+    document.getElementById("introTitle").textContent = " j’ai quelque chose pour toiii";
+    document.title = "Joyeux anniversaire " + NAME + " !";
+  }
+
+  const pic = document.getElementById("pic"), ph = document.getElementById("ph");
+  pic.addEventListener("error", () => { pic.hidden = true; ph.hidden = false; });
+
+  // Confetti (fines lamelles, tons sobres)
+  const cv = document.getElementById("fx"), ctx = cv.getContext("2d");
+  let parts = [], running = false;
+  const colors = ["#ffd84d","#f5f5f2","#8d8d88","#ffffff"];
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const resize = () => { cv.width = innerWidth; cv.height = innerHeight; };
+  addEventListener("resize", resize); resize();
+  function cannon(x, dir, n = 90){
+    for (let i = 0; i < n; i++) parts.push({ x, y: innerHeight*0.85, vx: dir*(Math.random()*10+2), vy:-Math.random()*17-6,
+      w: Math.random()*5+3, h: Math.random()*14+6, c: colors[i % colors.length], r: Math.random()*6, vr:(Math.random()-.5)*.35 });
+    if (!running){ running = true; tick(); }
+  }
+  function tick(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    parts.forEach(p => { p.vy += .32; p.vx *= .995; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.r); ctx.fillStyle = p.c; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore(); });
+    parts = parts.filter(p => p.y < innerHeight + 30);
+    if (parts.length) requestAnimationFrame(tick); else { running = false; ctx.clearRect(0,0,cv.width,cv.height); }
+  }
+
+  // Sons
+  let ac;
+  function tone(freq, t0, dur, type = "sine", vol = .2){
+    const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.value = freq; o.connect(g); g.connect(ac.destination);
+    g.gain.setValueAtTime(.0001, t0); g.gain.exponentialRampToValueAtTime(vol, t0+.02); g.gain.exponentialRampToValueAtTime(.0001, t0+dur);
+    o.start(t0); o.stop(t0+dur+.02);
+  }
+  function sound(kind){
+    try{
+      ac = ac || new (window.AudioContext || window.webkitAudioContext)(); const t = ac.currentTime;
+      if (kind === "tick") tone(660, t, .15, "triangle", .18);
+      if (kind === "tada"){ [523,659,784,1047].forEach((f,i) => tone(f, t+i*.09, .5, "triangle", .2)); tone(1047, t+.4, .9, "sine", .16); }
+    }catch(e){}
+  }
+
+  const screens = ["intro","count","flash","reveal"];
+  const show = id => screens.forEach(s => document.getElementById(s).classList.toggle("on", s === id));
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+
+  let playing = false;
+  const caps = {3:"Respire un bon coup.", 2:"Fais semblant d’être surpris.", 1:"Ça y est…"};
+  async function play(){
+    if (playing) return; playing = true;
+    const go = document.getElementById("go"); go.disabled = true;
+    show("count");
+    const ring = document.getElementById("ring"), el = document.getElementById("n");
+    for (const n of [3,2,1]){
+      document.getElementById("cap").textContent = caps[n];
+      el.textContent = n; el.style.animation = "none"; void el.offsetWidth; el.style.animation = "";
+      ring.classList.remove("run"); void ring.offsetWidth; ring.classList.add("run");
+      sound("tick"); if (navigator.vibrate) navigator.vibrate(40);
+      await wait(850);
+    }
+    show("flash"); sound("tada"); if (navigator.vibrate) navigator.vibrate([80,40,160]);
+    if (!calm){ cannon(0, 1, 110); cannon(innerWidth, -1, 110); }
+    await wait(1300);
+    show("reveal"); window.scrollTo(0,0);
+    if (!calm){ cannon(innerWidth*0.2, 1, 70); cannon(innerWidth*0.8, -1, 70); }
+    go.disabled = false; playing = false;
+  }
+  document.getElementById("go").addEventListener("click", play);
+
+  // Le bouton « Non » ne veut pas se laisser appuyer
+  const no = document.getElementById("no"), nomsg = document.getElementById("nomsg");
+  const refus = ["Mauvaise réponse.", "Je ne connais pas ce mot.", "Bon, on va dire que c’était un oui", "Bon, on va dire que c’était un oui."];
+  let k = 0;
+  function dodge(e){
+    if (e) e.preventDefault();
+    if (playing) return;
+    if (k >= 3){ nomsg.textContent = refus[3]; no.style.transform = "none"; play(); return; }
+    no.style.transform = "translate(" + ((Math.random()-.5)*150) + "px," + ((Math.random()-.5)*60) + "px) rotate(" + ((Math.random()-.5)*24) + "deg)";
+    nomsg.textContent = refus[k++];
+  }
+  no.addEventListener("click", dodge);
+  no.addEventListener("touchstart", dodge, {passive:false});
+  document.getElementById("again").addEventListener("click", () => { k = 0; nomsg.textContent = ""; no.style.transform = "none"; show("intro"); window.scrollTo(0,0); });
+</script>
+</body>
+</html>
